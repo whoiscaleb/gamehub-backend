@@ -66,20 +66,21 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
     res.send("hello world");
 });
+// SPLASH ROUTE 
 
 // INDEX ROUTE
-app.get("/gamehub", async (req, res) => {
-    try {
-        // send all data
-        res.json(await Game.find({}));
-    } catch (error) {
-        //send error
-        res.status(400).json(error);
-    }
+app.get("/collection", async (req, res) => {
+  try {
+    const games = await Game.find({}); // Retrieve game data from MongoDB
+    res.json(games); // Send the game data as the response
+  } catch (error) {
+    res.status(400).json(error);
+  }
 });
 
+
 // CREATE ROUTE
-app.post("/gamehub", async (req, res) => {
+app.post("/collection/create", async (req, res) => {
     try {
         // send all data
         res.json(await Game.create(req.body));
@@ -90,7 +91,7 @@ app.post("/gamehub", async (req, res) => {
 });
 
 // DELETE ROUTE
-app.delete("/gamehub/:id", async (req, res) => {
+app.delete("/collection/:id", async (req, res) => {
     try {
       // send all people
       res.json(await Game.findByIdAndRemove(req.params.id));
@@ -102,9 +103,9 @@ app.delete("/gamehub/:id", async (req, res) => {
 
 
   // UPDATE ROUTE
-app.put("/gamehub/:id", async (req, res) => {
+app.put("/collection/:id", async (req, res) => {
     try {
-      // send all people
+      // send all game data
       res.json(
         await Game.findByIdAndUpdate(req.params.id, req.body, { new: true })
       );
