@@ -115,5 +115,17 @@ app.put("/collection/:id", async (req, res) => {
     }
 })
 
+
+// SHOW ROUTE 
+app.get("/collection/:id", async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.id);
+    res.json(game);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+
 // LISTENER
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
