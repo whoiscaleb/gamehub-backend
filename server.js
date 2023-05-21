@@ -49,6 +49,7 @@ const GameSchema = new mongoose.Schema({
     Review: String, 
     Publisher: String,
     Image: String,
+    Number: Number,
 
 });
 
